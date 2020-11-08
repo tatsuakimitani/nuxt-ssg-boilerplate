@@ -1,0 +1,24 @@
+{
+  "name": "nuxt-ssg-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.12.2",
+    "core-js": "^3.6.5",
+    "nuxt": "^2.14.6",
+    "nuxt-i18n": "^6.15.4"
+  },
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
+    "fibers": "^5.0.0",
+    "nuxt-purgecss": "^1.0.0",
+    "sass": "^1.28.0",
+    "sass-loader": "^10.0.5"
+  }
+}
