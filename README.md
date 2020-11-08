@@ -103,13 +103,13 @@ And add the `<NuxtLink>` component for every mountain that we fetched
 
 <template>
 	<div>
-		<h1>Nuxt.js SPA Boilerplate</h1>
-		<ul>
-			<li  v-for="mountain  in  mountains" :key="mountain.slug">
-				<nuxt-link :to="mountain.slug">{{ mountain.title }}</nuxt-link>
-			</li>
-		</ul>
-	</div>
+    <h1>Nuxt.js SPA Boilerplate</h1>
+    <ul>
+      <li v-for="mountain in mountains" :key="mountain.slug">
+        <nuxt-link :to="mountain.slug">{{ mountain.title }}</nuxt-link>
+      </li>
+    </ul>
+  </div>	
 </template>
 ````
 
