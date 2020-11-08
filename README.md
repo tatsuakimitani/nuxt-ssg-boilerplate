@@ -87,14 +87,14 @@ Now we can fetch de data
 // pages/index.vue
 
 <script>
-	export  default {
-		async  asyncData() {
-			const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  =>
-			res.json())
+  export  default {
+    async  asyncData() {
+      const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  =>
+	    res.json())
 			
-			return { mountains }
-		}
-	}
+	    return { mountains }
+    }
+  }
 </script>
 ````
 And add the `<NuxtLink>` component for every mountain that we fetched
@@ -102,7 +102,7 @@ And add the `<NuxtLink>` component for every mountain that we fetched
 <!-- pages/index.vue -->
 
 <template>
-	<div>
+  <div>
     <h1>Nuxt.js SPA Boilerplate</h1>
     <ul>
       <li v-for="mountain in mountains" :key="mountain.slug">
@@ -118,11 +118,11 @@ Now we can make the dynamic page component based on the `slug` of every `mountai
 ````js
 // _slug.vue
 export  default {
-	async  asyncData({ params }) {
-		const  mountain  =  await  fetch(`https://api.nuxtjs.dev/mountains/${params.slug}`).then(res  =>  res.json())
+  async  asyncData({ params }) {
+    const  mountain  =  await  fetch(`https://api.nuxtjs.dev/mountains/${params.slug}`).then(res  =>  res.json())
 		
-		return { mountain }
-	}
+    return { mountain }
+  }
 }
 ````
 Now if we run the command
