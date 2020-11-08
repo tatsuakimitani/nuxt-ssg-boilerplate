@@ -1,126 +1,142 @@
 
+  
 <p align="center">
-  <br>
-  <img width="400" src="https://raw.githubusercontent.com/dennisfrijlink/development-utilities/main/images/Nuxt-Spa.svg" alt="logo of Nuxt Single Page Application Repository">
-  <br>
-  <br>
+  <img width="400" src="https://raw.githubusercontent.com/dennisfrijlink/development-utilities/959061a8b1370b62a6b9e48549dc1d272564485e/images/Nuxt-SSG.svg" alt="logo of Nuxt Single Page Application Repository">
+</p>
+<h1 align="center">
+  Static Page Generation Boilerplate - Nuxt.js
+</h1>
+<p align="center">
+  A boilerplate for static site generation based on the Vue.js Framework, Nuxt.js
+  </a>
 </p>
 
-# Single Page Application Boilerplate - Nuxt.js
-> A boilerplate for single page applications based on the Vue.js Framework, Nuxt.js
+## 🧐 What's inside
+This Repository is an expansion of the [Nuxt SPA Boilerplate](https://github.com/dennisfrijlink/nuxt-spa-boilerplate) repository.
 
-## Contents
-- [Build Setup](#build-setup)
-- [Mobile First](#breakpoints-mobile-first)
+- [Quick start](#user-content--quick-start)
+- [What is a SSG?](#user-content--what-is-static-site-generation)
 
-## Build Setup
-```bash
-# install dependencies
-$ npm install
+## ✨ Quick start
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+1.  **Clone this repository.**
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+    ```sh
+    git clone https://github.com/dennisfrijlink/nuxt-ssg-boilerplate.git
+    ```
 
-# generate static project
-$ npm run generate
-```
-## Breakpoints mobile first
-The scss folder located in  ``./assets/scss/``  contains two files to make it easier for web developers to prototype, build, scale, and maintain CSS for responsive websites:
-### SCSS Files
-```
-assets
-│
-└─── scss
-    │
-    └─── _mixins.scss
-    │
-    └─── breakpoints.scss
-```
-### Usage
-Building responsive websites is a must-have skill for front-end developers today, so we've made the breakpoints mobile first. They are all defined with a ``@media (min-width:``  so that the main css you write is based on mobile screens.
-````
-/* Small (sm) */
-$screen-sm-min: 640px;
+2.  **Start developing.**
 
-/* Medium (md) */
-$screen-md-min: 768px;
+    Navigate into your new site’s directory and start it up.
 
-/* Large (lg) */
-$screen-lg-min: 1024px;
+    ```sh
+    cd nuxt-ssg-boilerplate/
+    npm install
+    npm run dev
+    ```
 
-/* Extra Large (xl) */
-$screen-xl-min: 1280px;
-````
+3.  **Running!**
 
-Now it’s time to create the most important element – mixins:
-````
-// Small devices
-@mixin  sm {
-	@media (min-width: #{$screen-sm-min}) {
-		@content;
-	}	
-}
+    Your site is now running at `http://localhost:3000`!
 
-// Medium devices
-@mixin  md {
-	@media (min-width: #{$screen-md-min}) {
-		@content;
-	}	
-}
+4.  **Generate for deploy**
+    
+    Generate a static project that will be located in the ``dist`` folder:
+    ```bash
+    $ npm run generate
+    ```
+## ⚙️ What is Static Site Generation
+Static Site Generators are a  hybrid approach to web development that allow you to build a powerful, server-based website locally on your computer but pre-builds the site into static files for deployment.
 
-// Large devices
-@mixin  lg {
-	@media (min-width: #{$screen-lg-min}) {
-		@content;
-	}	
-}
+### Advantages of Static Sites
 
-// Extra large devices
-@mixin  xl {
-	@media (min-width: #{$screen-xl-min}) {
-		@content;
-	}	
+#### 1) Fast
+
+Static sites are fast! Since there are no database queries, no templates to render, and no client-server requests to process, a static site will always load faster.
+
+#### 2) Secure
+
+Dynamic websites are constantly at risk of attack. Drupal, which powers 5% of all websites (12+ million users) was  recently hacked  and Wordpress, which powers 26% of all websites, is notorious for frequent security vulnerabilities.
+
+#### 3) Cheap
+
+Static sites (like this one) costs pennies per month to run on services like Amazon S3. Dynamic sites require the setup, hosting, and maintenance of a server which is much, much more expensive.
+
+#### 4) Scalable
+
+Unexpected traffic surges can crash a dynamic site. A static site is much better prepared as delivering static pages consumes very little server resources.
+
+<p align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/dennisfrijlink/development-utilities/main/images/SSG%20lifecycle.png" alt="Lifecycle of Single Page Application">
+</p>
+
+## 🗺️ Generating routes
+`nuxt generate` with `target: 'static'` will pre-render all your pages to HTML and save a payload file in order to mock `asyncData` and `fetch` on client-side navigation, this means **no**  **more HTTP calls to your API on client-side navigation.** By extracting the page payload to a js file, **it also reduces the HTML size** served as well as preloading it (from the in the header) for optimal performance.
+
+````js
+// nuxt.config.js 
+export default {
+	target: 'static'
 }
 ````
 
-I always build my websites in a mobile-first approach, so I don’t need to define the smallest screen size (xs – extra small) and I write my SCSS code first for the smallest devices and next for the largest. Sometimes we also need to define some styles beyond the rigidly defined breakpoints. Let’s add one more mixin – I called it “rwd”:
+Full static **doesn't** work with `ssr: 'false'` (which is the same as the deprecated `mode: 'spa'`) as this is used for client-side rendering only (Single Page Applications).
+
+Now we can fetch de data
+````js
+// pages/index.vue
+
+<script>
+	export  default {
+		async  asyncData() {
+			const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  =>
+			res.json())
+			
+			return { mountains }
+		}
+	}
+</script>
 ````
-// Custom devices
-@mixin rwd($screen) {
-	@media (min-width: $screen+'px') {
-		@content;
+And add the `<NuxtLink>` component for every mountain that we fetched
+````html
+<!-- pages/index.vue -->
+
+<template>
+	<div>
+		<h1>Nuxt.js SPA Boilerplate</h1>
+		<ul>
+			<li  v-for="mountain  in  mountains" :key="mountain.slug">
+				<nuxt-link :to="mountain.slug">{{ mountain.title }}</nuxt-link>
+			</li>
+		</ul>
+	</div>
+</template>
+````
+
+Now we can make the dynamic page component based on the `slug` of every `mountain`. Here we fetch the data based on the `slug` we pass in the `index.vue` component
+
+````js
+// _slug.vue
+export  default {
+	async  asyncData({ params }) {
+		const  mountain  =  await  fetch(`https://api.nuxtjs.dev/mountains/${params.slug}`).then(res  =>  res.json())
+		
+		return { mountain }
 	}
 }
 ````
-As a parameter `$screen` we can put any screen size.
-
-### For Example
+Now if we run the command
+```bash
+$ npm run generate
+```
+Nuxt.js will generate a route for every mountain fetched from the API url:
+````bash
+√ Generated route "/"                                                                                         
+√ Generated route "/mount-kosciuszko"                                                                         
+√ Generated route "/mount-blanc"                                                                              
+√ Generated route "/aconcagua"                                                                                
+√ Generated route "/vinson-massif"                                                                            
+√ Generated route "/mount-everest"                                                                            
+√ Generated route "/denali"                                                                                   
+√ Generated route "/mount-kilimanjaro"
 ````
-.container {
-    padding: 0 15px;
-    
-	// 576px window width and more
-    @include sm {
-        padding: 0 20px;
-    }
-    
-	// 992px window width and more
-    @include lg {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 1100px;
-    }
-    
-	// 1400px window width and more
-    @include rwd(1400) {
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-}
-````
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
