@@ -60,7 +60,7 @@ Dynamic websites are constantly at risk of attack. Drupal, which powers 5% of al
 
 #### 3) Cheap
 
-Static sites (like this one) costs pennies per month to run on services like Amazon S3. Dynamic sites require the setup, hosting, and maintenance of a server which is much, much more expensive.
+Static sites costs pennies per month to run on services like Amazon S3. Dynamic sites require the setup, hosting, and maintenance of a server which is much, much more expensive.
 
 #### 4) Scalable
 
