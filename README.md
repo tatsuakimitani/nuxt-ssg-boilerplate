@@ -76,7 +76,7 @@ Unexpected traffic surges can crash a dynamic site. A static site is much better
 ````js
 // nuxt.config.js 
 export default {
-	target: 'static'
+  target: 'static'
 }
 ````
 
@@ -89,9 +89,7 @@ Now we can fetch de data
 <script>
   export  default {
     async  asyncData() {
-      const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  =>
-	    res.json())
-			
+      const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  => res.json())
 	    return { mountains }
     }
   }
