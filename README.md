@@ -15,7 +15,7 @@
 This Repository is an expansion of the [Nuxt SPA Boilerplate](https://github.com/dennisfrijlink/nuxt-spa-boilerplate) repository.
 
 - [Quick start](#user-content--quick-start)
-- [What is a SSG?](#user-content--what-is-static-site-generation)
+- [What is SSG?](#user-content-️-what-is-static-site-generation)
 
 ## ✨ Quick start
 
@@ -60,7 +60,7 @@ Dynamic websites are constantly at risk of attack. Drupal, which powers 5% of al
 
 #### 3) Cheap
 
-Static sites (like this one) costs pennies per month to run on services like Amazon S3. Dynamic sites require the setup, hosting, and maintenance of a server which is much, much more expensive.
+Static sites costs pennies per month to run on services like Amazon S3. Dynamic sites require the setup, hosting, and maintenance of a server which is much, much more expensive.
 
 #### 4) Scalable
 
@@ -76,7 +76,7 @@ Unexpected traffic surges can crash a dynamic site. A static site is much better
 ````js
 // nuxt.config.js 
 export default {
-	target: 'static'
+  target: 'static'
 }
 ````
 
@@ -87,14 +87,12 @@ Now we can fetch de data
 // pages/index.vue
 
 <script>
-	export  default {
-		async  asyncData() {
-			const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  =>
-			res.json())
-			
-			return { mountains }
-		}
-	}
+  export  default {
+    async  asyncData() {
+      const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  => res.json())
+	    return { mountains }
+    }
+  }
 </script>
 ````
 And add the `<NuxtLink>` component for every mountain that we fetched
@@ -102,14 +100,14 @@ And add the `<NuxtLink>` component for every mountain that we fetched
 <!-- pages/index.vue -->
 
 <template>
-	<div>
-		<h1>Nuxt.js SPA Boilerplate</h1>
-		<ul>
-			<li  v-for="mountain  in  mountains" :key="mountain.slug">
-				<nuxt-link :to="mountain.slug">{{ mountain.title }}</nuxt-link>
-			</li>
-		</ul>
-	</div>
+  <div>
+    <h1>Nuxt.js SPA Boilerplate</h1>
+    <ul>
+      <li v-for="mountain in mountains" :key="mountain.slug">
+        <nuxt-link :to="mountain.slug">{{ mountain.title }}</nuxt-link>
+      </li>
+    </ul>
+  </div>	
 </template>
 ````
 
@@ -118,11 +116,11 @@ Now we can make the dynamic page component based on the `slug` of every `mountai
 ````js
 // _slug.vue
 export  default {
-	async  asyncData({ params }) {
-		const  mountain  =  await  fetch(`https://api.nuxtjs.dev/mountains/${params.slug}`).then(res  =>  res.json())
+  async  asyncData({ params }) {
+    const  mountain  =  await  fetch(`https://api.nuxtjs.dev/mountains/${params.slug}`).then(res  =>  res.json())
 		
-		return { mountain }
-	}
+    return { mountain }
+  }
 }
 ````
 Now if we run the command
