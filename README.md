@@ -82,6 +82,20 @@ export default {
 
 Full static **doesn't** work with `ssr: 'false'` (which is the same as the deprecated `mode: 'spa'`) as this is used for client-side rendering only (Single Page Applications).
 
+When using the `nuxt/http` library you can define the baseURL in the `nuxt.config.js`:
+
+```js
+// nuxt.config.js
+
+export default {
+  modules: [
+    ['@nuxt/http', {
+      baseURL: 'https://api.nuxtjs.dev/mountains'
+    }]
+  ]
+}
+```
+
 Now we can fetch de data
 ````js
 // pages/index.vue
