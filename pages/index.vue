@@ -1,11 +1,11 @@
 <template>
   <div>
-    Nuxt.js SSG Boilerplate
-  </div>
+    <h1>Nuxt.js SSG Boilerplate</h1>
+  </div>	
 </template>
 
 <script>
-  export default {
+  export  default {
     name: 'index'
   }
 </script>
