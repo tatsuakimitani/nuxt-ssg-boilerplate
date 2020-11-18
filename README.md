@@ -101,7 +101,7 @@ Now we can fetch de data
   export  default {
     name: 'index',
     async asyncData({ $http }) {
-      const mountains = await $http.$get('/mountains') // https://api.nuxtjs.dev/mountains/aconcagua
+      const mountains = await $http.$get('/mountains') // https://api.nuxtjs.dev/mountains
       return { mountains }
     }
   }
@@ -123,7 +123,7 @@ Now we can make the dynamic page component based on the `slug` of every `mountai
 <script>
   export default {
     async asyncData({ $http, params }) {
-    const mountain = await $http.$get(`/mountains/${params.slug}`)
+    const mountain = await $http.$get(`/mountains/${params.slug}`) // https://api.nuxtjs.dev/mountains/aconcagua
     return { mountain }
   }
 }
