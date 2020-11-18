@@ -16,6 +16,7 @@ This Repository is an expansion of the [Nuxt SPA Boilerplate](https://github.com
 
 - [Quick start](#user-content--quick-start)
 - [What is SSG?](#user-content-️-what-is-static-site-generation)
+- [Generating Routes](#user-content--generating-routes)
 
 ## ✨ Quick start
 
