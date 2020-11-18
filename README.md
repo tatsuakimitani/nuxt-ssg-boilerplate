@@ -86,22 +86,9 @@ Now we can fetch de data
 ````js
 // pages/index.vue
 
-<script>
-  export  default {
-    async  asyncData() {
-      const  mountains  =  await  fetch("https://api.nuxtjs.dev/mountains").then(res  => res.json())
-	    return { mountains }
-    }
-  }
-</script>
-````
-And add the `<NuxtLink>` component for every mountain that we fetched
-````html
-<!-- pages/index.vue -->
-
 <template>
   <div>
-    <h1>Nuxt.js SPA Boilerplate</h1>
+    <h1>Nuxt.js SSG Boilerplate</h1>
     <ul>
       <li v-for="mountain in mountains" :key="mountain.slug">
         <nuxt-link :to="mountain.slug">{{ mountain.title }}</nuxt-link>
@@ -109,19 +96,38 @@ And add the `<NuxtLink>` component for every mountain that we fetched
     </ul>
   </div>	
 </template>
+
+<script>
+  export  default {
+    name: 'index',
+    async asyncData({ $http }) {
+      const mountains = await $http.$get('/mountains') // https://api.nuxtjs.dev/mountains/aconcagua
+      return { mountains }
+    }
+  }
+</script>
+
 ````
 
 Now we can make the dynamic page component based on the `slug` of every `mountain`. Here we fetch the data based on the `slug` we pass in the `index.vue` component
 
 ````js
 // _slug.vue
-export  default {
-  async  asyncData({ params }) {
-    const  mountain  =  await  fetch(`https://api.nuxtjs.dev/mountains/${params.slug}`).then(res  =>  res.json())
-		
+<template>
+  <div>
+    <h1>{{ mountain.slug }}</h1>
+    <img :src="mountain.image" :alt="mountain.slug">
+  </div>
+</template>
+
+<script>
+  export default {
+    async asyncData({ $http, params }) {
+    const mountain = await $http.$get(`/mountains/${params.slug}`)
     return { mountain }
   }
 }
+</script>
 ````
 Now if we run the command
 ```bash
