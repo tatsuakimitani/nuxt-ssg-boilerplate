@@ -27,6 +27,10 @@ export default {
     '@nuxtjs/style-resources'
   ],
 
+  css: [
+    './assets/fonts/fonts.css'
+  ],
+
   styleResources: {
     scss: [
       './assets/scss/*.scss',
