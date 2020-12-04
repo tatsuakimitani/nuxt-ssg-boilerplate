@@ -28,8 +28,10 @@ export default {
   ],
 
   css: [
-    './assets/fonts/fonts.css'
+    './assets/css/theme.css',
+    './assets/css/fonts.css'
   ],
+
 
   styleResources: {
     scss: [
@@ -44,7 +46,8 @@ export default {
     ['@nuxt/http', {
       baseURL: ''
     }],
-    'nuxt-i18n'
+    'nuxt-i18n',
+    '@nuxtjs/color-mode' //only necassary if color templates are included
   ],
 
   i18n: {}
