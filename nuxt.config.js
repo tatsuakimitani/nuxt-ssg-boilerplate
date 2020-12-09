@@ -26,6 +26,10 @@ export default {
     'nuxt-purgecss',
     '@nuxtjs/style-resources'
   ],
+  
+  purgeCSS: {
+    whiteList: () =>['dark-mode']
+  },
 
   css: [
     './assets/css/theme.css',
